@@ -1,7 +1,10 @@
 package com.example.order;
 
 import com.example.order.Model.Order;
+import com.example.order.Model.Side;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class OrderService {
@@ -26,5 +29,13 @@ public class OrderService {
         orderToChange.setFilled(order.getFilled());
         orderRepository.save(orderToChange);
         return true;
+    }
+
+    public List<Order> getAllOrderByUser(String username) {
+        return orderRepository.findAllByOwner(username);
+    }
+
+    public List<Order> getOrderByTicketNotClose(String ticker, Side side) {
+        return orderRepository.findNotDoneTicker(ticker,side);
     }
 }

@@ -1,10 +1,14 @@
 package com.example.order;
 
 import com.example.order.Model.Order;
+import com.example.order.Model.Side;
 import jakarta.ws.rs.QueryParam;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class OrderController {
@@ -25,7 +29,6 @@ public class OrderController {
 
     @GetMapping("/order/{guid}")
     public ResponseEntity<Order> readOne(@PathVariable("guid") String guid) {
-        System.out.println(guid);
         Order order = orderService.readOne(guid);
         if (order == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         else return new ResponseEntity<>(order, HttpStatus.OK);
@@ -39,4 +42,19 @@ public class OrderController {
         if(!updated) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/order/by-user/{username}")
+    public ResponseEntity<List<Order>> getAllOrderByUser(@PathVariable("username") String username) {
+        List<Order> orders = orderService.getAllOrderByUser(username);
+        if (orders.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        else return new ResponseEntity<>(orders, HttpStatus.OK);
+    }
+
+    @GetMapping("/order/open/by-ticker/{ticker}/{side}")
+    public ResponseEntity<List<Order>> getOrderByTicketNotClose(@PathVariable("ticker") String ticker, @PathVariable("side") Side side) {
+        List<Order> orders = orderService.getOrderByTicketNotClose(ticker,side);
+        System.out.println(orders);
+        return new ResponseEntity<>(orders, HttpStatus.OK);
+    }
+
 }
