@@ -27,7 +27,6 @@ public class MatchingService {
       for (Order sell : sellOrders) {
         int available = sell.getQuantity() - sell.getFilled();
 
-
         if (buy.getType().equals(Type.LIMIT) && sell.getType().equals(Type.LIMIT) ) {
           if(buy.getLimit() >= sell.getLimit()) {
             toFill -= available;
