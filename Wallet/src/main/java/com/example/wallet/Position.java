@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @Entity(name = "wallets")
-public class Wallet {
+public class Position {
 
   @Id
   @Column(nullable = false)
@@ -24,4 +24,8 @@ public class Wallet {
 
   @Column(nullable = false)
   private double unitValue;
+
+  public double getNetWorth() {
+    return quantity * unitValue;
+  }
 }
