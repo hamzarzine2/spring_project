@@ -1,10 +1,9 @@
-package com.example.matching;
+package org.example;
 
-import com.example.matching.Model.Order;
-import com.example.matching.Model.Side;
-import com.example.matching.Model.Type;
 import java.util.List;
-import org.springframework.boot.autoconfigure.web.reactive.function.client.WebClientAutoConfiguration;
+import org.example.Model.Order;
+import org.example.Model.Side;
+import org.example.Model.Type;
 import org.springframework.web.client.RestTemplate;
 
 public class MatchingService {

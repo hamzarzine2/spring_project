@@ -1,4 +1,4 @@
-package com.example.matching.Model;
+package org.example.Model;
 
 public enum Side {
     BUY("BUY"),SELL("SELL");

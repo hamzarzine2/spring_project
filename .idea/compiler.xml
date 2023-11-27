@@ -11,6 +11,7 @@
         <module name="auth" />
         <module name="Wallet" />
         <module name="order" />
+        <module name="matching" />
       </profile>
       <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />
@@ -22,6 +23,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="product" target="17" />
+      <module name="wrong_matching" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

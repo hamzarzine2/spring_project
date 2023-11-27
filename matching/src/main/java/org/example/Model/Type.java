@@ -1,4 +1,4 @@
-package com.example.matching.Model;
+package org.example.Model;
 
 public enum Type {
     LIMIT("LIMIT"),MARKET("MARKET");
