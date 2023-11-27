@@ -1,6 +1,6 @@
 package com.example.auth;
 
-import com.example.authentification.models.UnsafeCredentials;
+import com.example.auth.models.UnsafeCredentials;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
