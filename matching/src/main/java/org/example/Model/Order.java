@@ -1,4 +1,4 @@
-package com.example.matching.Model;
+package org.example.Model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

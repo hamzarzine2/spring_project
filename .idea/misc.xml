@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
-    <file type="web" url="file://$PROJECT_DIR$/matching" />
+    <file type="web" url="file://$PROJECT_DIR$/wrong_matching" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
@@ -11,6 +11,7 @@
         <option value="$PROJECT_DIR$/Eureka/pom.xml" />
         <option value="$PROJECT_DIR$/auth/pom.xml" />
         <option value="$PROJECT_DIR$/Wallet/pom.xml" />
+        <option value="$PROJECT_DIR$/matching/pom.xml" />
       </list>
     </option>
   </component>
