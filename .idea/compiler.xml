@@ -23,6 +23,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="product" target="17" />
+      <module name="wrong_matching" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
