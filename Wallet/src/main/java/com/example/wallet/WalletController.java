@@ -10,18 +10,16 @@ import org.springframework.web.bind.annotation.*;
 public class WalletController {
 
     private final WalletService service;
-    private final InvestorProxy investorproxy;
 
     public WalletController(WalletService walletService, InvestorProxy investorProxy) {
         this.service = walletService;
-        this.investorproxy = investorProxy;
     }
 
     //todo vérifier cette méthode
     @GetMapping("/wallet/{username}/net-worth")
     public ResponseEntity<Double> getNetWorth(@PathVariable String username) {
         //vérifier si l'user existe sinon 404
-        if(investorproxy.getAllInvestors().stream().noneMatch(investor -> investor.getUsername().equals(username)))
+        if (service.getNetWorth(username) == 0) //TODO
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         double netWorth = service.getNetWorth(username);
@@ -31,7 +29,7 @@ public class WalletController {
     @GetMapping("/wallet/{username}")
     public ResponseEntity<List<Position>> getOpenedPositions(@PathVariable String username) {
         //vérifier si l'user existe sinon 404
-        if(investorproxy.getAllInvestors().stream().noneMatch(investor -> investor.getUsername().equals(username)))
+        if(service.getOpenedPositions(username) == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
 

@@ -12,7 +12,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-@Entity(name = "wallets")
+@Entity(name = "positions")
 public class Position {
 
   @Id

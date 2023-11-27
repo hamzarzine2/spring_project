@@ -1,0 +1,2 @@
+### get all positions
+GET http://localhost:9006/positions/getAllPositions
