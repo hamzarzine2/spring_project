@@ -2,14 +2,12 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Eureka" />
         <module name="auth" />
-        <module name="Price" />
         <module name="Wallet" />
         <module name="order" />
       </profile>
@@ -21,7 +19,6 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Eureka" options="-parameters" />
-      <module name="Price" options="-parameters" />
       <module name="Wallet" options="-parameters" />
       <module name="auth" options="-parameters" />
       <module name="order" options="-parameters" />
