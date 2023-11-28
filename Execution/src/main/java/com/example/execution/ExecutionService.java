@@ -6,50 +6,46 @@ import com.example.execution.proxy.OrderProxy;
 import com.example.execution.proxy.PriceProxy;
 import com.example.execution.proxy.WalletProxy;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class ExecutionService {
 
     @Autowired
-    WalletProxy walletProxy;
+    private WalletProxy walletProxy;
+
     @Autowired
-    PriceProxy priceProxy;
+    private PriceProxy priceProxy;
+
     @Autowired
-    OrderProxy orderProxy;
-    public boolean executeOrder( String ticker,  String seller,  String buyer,  Transaction transaction) {
-        ResponseEntity<Void> walletSellerCashResponse= updateStock(transaction,seller,"CASH");
-        if(!handleResponse(walletSellerCashResponse))return false;
-        ResponseEntity<Void> walletCashBuy = updateStock(transaction,buyer,"CASH");
-        if(!handleResponse(walletCashBuy))return false;
-        ResponseEntity<Void> walletSellerStockResponse=updateStock(transaction,seller,ticker);
-        if(!handleResponse(walletSellerStockResponse))return false;
-        ResponseEntity<Void> walletBuyerStockResponse=updateStock(transaction,buyer,ticker);
-        if(!handleResponse(walletBuyerStockResponse))return false;
-        ResponseEntity<Void> priceResponse=priceProxy.updatePrice(ticker,transaction.getPrice());
-        if(!handleResponse(priceResponse))return false;
-        ResponseEntity<Void> orderResponse=updateOrder(transaction.getBuy_order_guid(),transaction.getQuantity());
-        if(handleResponse(orderResponse))return false;
-        ResponseEntity<Void> orderResponse2=updateOrder(transaction.getSell_order_guid(),transaction.getQuantity());
-        return handleResponse(orderResponse2);
+    private OrderProxy orderProxy;
+
+    public boolean executeOrder(String ticker, String seller, String buyer, Transaction transaction) {
+        return executeUpdateStock(transaction, seller, "CASH",transaction.getQuantity()) &&
+                executeUpdateStock(transaction, buyer, "CASH", -transaction.getQuantity()) &&
+                executeUpdateStock(transaction, seller, ticker,-transaction.getQuantity()) &&
+                executeUpdateStock(transaction, buyer, ticker,-transaction.getQuantity()) &&
+                handleResponse(priceProxy.updatePrice(ticker, transaction.getPrice())) &&
+                handleResponse(updateOrder(transaction.getBuy_order_guid(), transaction.getQuantity())) &&
+                handleResponse(updateOrder(transaction.getSell_order_guid(), transaction.getQuantity()));
     }
 
-    private ResponseEntity<Void> updateStock(Transaction transaction, String user, String ticker) {
-        Position position = null;
+    private boolean executeUpdateStock(Transaction transaction, String user, String ticker,int montant ) {
+        Position position = new Position();
         position.setTicker(ticker);
-        position.setQuantity(-transaction.getQuantity());
+        //problème de moins ici
+        position.setQuantity(montant);
         position.setUnitValue(transaction.getPrice());
-        return walletProxy.addPosition(user,position);    }
-
-    private boolean handleResponse (ResponseEntity<Void> response){
-        return response.getStatusCode().isError()?  false:   true;
+        ResponseEntity<Void> walletResponse = walletProxy.addPosition(user, position);
+        return handleResponse(walletResponse);
     }
 
-    private ResponseEntity<Void> updateOrder(String orderID,int quantity) {
-        return orderProxy.updateOrder(orderID,quantity);
+    private boolean handleResponse(ResponseEntity<Void> response) {
+        return !response.getStatusCode().isError();
+    }
+
+    private ResponseEntity<Void> updateOrder(String orderId, int quantity) {
+        return orderProxy.updateOrder(orderId, quantity);
     }
 }
