@@ -1,4 +1,4 @@
-package com.example.wallet;
+package com.example.wallet.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,20 +12,27 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-@Entity(name = "wallets")
+@Entity(name = "positions")
 public class Position {
 
   @Id
   @Column(nullable = false)
+  private int id;
+
+  @Column(nullable = false)
   private String ticker;
 
   @Column(nullable = false)
-  private int quantity;
+  private double quantity;
+
+  @Column(name = "unit_value")
+  private double unitValue;
 
   @Column(nullable = false)
-  private double unitValue;
+  private String username;
 
   public double getNetWorth() {
     return quantity * unitValue;
   }
+
 }

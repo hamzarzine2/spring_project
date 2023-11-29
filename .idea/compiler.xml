@@ -12,7 +12,6 @@
         <module name="Price" />
         <module name="Wallet" />
         <module name="order" />
-        <module name="matching" />
       </profile>
       <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />
@@ -23,6 +22,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="matching" target="1.8" />
+      <module name="Price" target="17" />
       <module name="product" target="17" />
       <module name="wrong_matching" target="17" />
     </bytecodeTargetLevel>
