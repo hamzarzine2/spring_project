@@ -23,8 +23,8 @@ public class WalletController {
     }
 
     @GetMapping("/wallet/{username}")
-    public ResponseEntity<List<Position>> getOpenedPositions(@PathVariable String username) {
-        List<Position> positions = service.getOpenedPositions(username);
+    public ResponseEntity<List<PositionDTO>> getOpenedPositions(@PathVariable String username) {
+        List<PositionDTO> positions = service.getOpenedPositions(username);
         return new ResponseEntity<>(positions, HttpStatus.OK);
     }
 
