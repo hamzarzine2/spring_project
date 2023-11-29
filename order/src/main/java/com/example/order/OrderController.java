@@ -53,7 +53,6 @@ public class OrderController {
     @GetMapping("/order/open/by-ticker/{ticker}/{side}")
     public ResponseEntity<List<Order>> getOrderByTicketNotClose(@PathVariable("ticker") String ticker, @PathVariable("side") Side side) {
         List<Order> orders = orderService.getOrderByTicketNotClose(ticker,side);
-        System.out.println(orders);
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
