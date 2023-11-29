@@ -1,0 +1,10 @@
+insert into positions (ticker, quantity, price, date) values ('AAPL', 10, 100, '2019-01-01');
+insert into positions (ticker, quantity, price, date) values ('ADPL', 100, 200, '2019-01-02');
+insert into positions (ticker, quantity, price, date) values ('EDPL', 1000, 2000, '2019-01-03');
+insert into positions (ticker, quantity, price, date) values ('GJEL', 10, 20, '2019-01-04');
+insert into positions (ticker, quantity, price, date) values ('OPLS', 100, 20, '2019-01-05');
+insert into positions (ticker, quantity, price, date) values ('PLZ', 10, 20, '2019-01-06');
+insert into positions (ticker, quantity, price, date) values ('PNIG', 100, 20, '2019-01-06');
+insert into positions (ticker, quantity, price, date) values ('NAS', 10, 20, '2019-01-06');
+insert into positions (ticker, quantity, price, date) values ('PL', 100, 20, '2019-01-06');
+insert into positions (ticker, quantity, price, date) values ('PL', 100, 20, '2019-01-06');
