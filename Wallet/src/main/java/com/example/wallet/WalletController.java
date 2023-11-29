@@ -15,16 +15,15 @@ public class WalletController {
         this.service = walletService;
     }
 
-    //todo vérifier cette méthode
     @GetMapping("/wallet/{username}/net-worth")
-    public ResponseEntity<Double> getNetWorth(@PathVariable String username) {
+    public ResponseEntity<Double> getNetWorth(@PathVariable("username") String username) {
         double netWorth = service.getNetWorth(username);
         return new ResponseEntity<>(netWorth, HttpStatus.OK);
     }
 
     @GetMapping("/wallet/{username}")
-    public ResponseEntity<List<Position>> getOpenedPositions(@PathVariable String username) {
-        List<Position> positions = service.getOpenedPositions(username);
+    public ResponseEntity<List<PositionDTO>> getOpenedPositions(@PathVariable String username) {
+        List<PositionDTO> positions = service.getOpenedPositions(username);
         return new ResponseEntity<>(positions, HttpStatus.OK);
     }
 

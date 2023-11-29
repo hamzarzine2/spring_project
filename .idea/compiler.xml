@@ -22,7 +22,6 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Execution" target="17" />
       <module name="product" target="17" />
       <module name="wrong_matching" target="17" />
     </bytecodeTargetLevel>
@@ -30,8 +29,9 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Eureka" options="-parameters" />
+      <module name="Execution" options="" />
       <module name="Wallet" options="-parameters" />
-      <module name="auth" options="-parameters" />
+      <module name="auth" options="" />
       <module name="order" options="-parameters" />
       <module name="product" options="-parameters" />
     </option>

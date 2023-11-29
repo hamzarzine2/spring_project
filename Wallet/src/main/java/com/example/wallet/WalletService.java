@@ -2,8 +2,8 @@ package com.example.wallet;
 
 import com.example.wallet.models.Position;
 import com.example.wallet.models.PositionDTO;
-import com.example.wallet.repositories.InvestorProxy;
 import com.example.wallet.repositories.WalletRepository;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -11,13 +11,10 @@ import org.springframework.stereotype.Service;
 public class WalletService {
 
   private final WalletRepository repository;
-  private final InvestorProxy investorproxy;
-
   private final PositionDTO positionDTO = new PositionDTO();
 
-  public WalletService(WalletRepository walletRepository, InvestorProxy investorproxy) {
+  public WalletService(WalletRepository walletRepository) {
     this.repository = walletRepository;
-    this.investorproxy = investorproxy;
   }
 
   /**
@@ -27,11 +24,9 @@ public class WalletService {
    */
   public double getNetWorth(String username) {
     double netWorth = 0;
-    if(investorproxy.getInvestor(username) == null) //TODO
-      return 0;
-
-    for (Position position : repository.findAll()) {
-      netWorth += position.getNetWorth();
+    List<Position> positions = repository.getAllByUsernameEquals(username);
+    for (Position position : positions) {
+      netWorth += position.getQuantity() * position.getUnitValue();
     }
     return netWorth;
   }
@@ -41,16 +36,15 @@ public class WalletService {
    * @param username of the user
    * @return a list of opened positions
    */
-  public List<Position> getOpenedPositions(String username){
-    List<Position> positions = null;
-    if (investorproxy.getInvestor(username) == null)
-      return null; //TODO
-    for (Position position : repository.findAll()) {
-      if(position.getNetWorth() > 0){
-        positions.add(position);
-      }
+  public List<PositionDTO> getOpenedPositions(String username){
+    List<Position> positions = repository.getAllByUsernameEquals(username);
+    List<PositionDTO> positionDTOs = new ArrayList<>();
+
+    for (Position position : positions) {
+      PositionDTO currentPosition = positionDTO.toDto(position);
+      positionDTOs.add(currentPosition);
     }
-    return positions;
+    return positionDTOs;
   }
 
   /**
@@ -63,9 +57,9 @@ public class WalletService {
   public List<PositionDTO> addPosition(String username, List<PositionDTO> positionDTOs){
     if (positionDTOs == null || positionDTOs.isEmpty())
       return null;
-    List<PositionDTO> positionList = null;
+    List<PositionDTO> positionList = new ArrayList<>();
     for (PositionDTO dto : positionDTOs) {
-      Position position = repository.getAllUserPositions(username, dto.getTicker());
+      Position position = repository.getUserPosition(username, dto.getTicker());
       if(position == null){
         position = new Position();
         position.setUsername(username);
