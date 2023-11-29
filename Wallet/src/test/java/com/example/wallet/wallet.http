@@ -1,2 +1,5 @@
-### get all positions from Jacques
+### get Jacques net worth
 GET http://localhost:9007/wallet/Jacques/net-worth
+
+### get Jacques oppened positions
+GET http://localhost:9007/wallet/Jacques

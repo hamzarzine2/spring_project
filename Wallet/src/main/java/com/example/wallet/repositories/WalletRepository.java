@@ -11,8 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface WalletRepository extends CrudRepository<Position, String>{
 
   @Query("select p from positions p where p.username =: username and p.ticker =: ticker ")
-  Position getAllUserPositions(@Param("username") String username, @Param("ticker") String ticker);
+  Position getUserPosition(@Param("username") String username, @Param("ticker") String ticker);
 
-  @Query("select sum(p.quantity*p.unitValue) from positions p where p.username =: username")
-  double getNetWorth(@Param("username") String username);
+  List<Position> getAllByUsernameEquals(String username);
 }

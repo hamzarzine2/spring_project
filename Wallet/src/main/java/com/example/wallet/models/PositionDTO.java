@@ -12,10 +12,9 @@ public class PositionDTO {
   private double quantity;
   private double unitValue;
 
-  public PositionDTO toDto(Position position) {
+  public void toDto(Position position) {
     this.ticker = position.getTicker();
     this.quantity = position.getQuantity();
     this.unitValue = position.getUnitValue();
-    return this;
   }
 }
