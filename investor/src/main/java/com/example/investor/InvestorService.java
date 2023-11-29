@@ -1,19 +1,32 @@
 package com.example.investor;
 
+import com.example.investor.model.UnSafeCredentials;
+import com.example.investor.model.Order;
+import com.example.investor.repository.AuthProxy;
 import com.example.investor.repository.InvestorRepository;
 import com.example.investor.model.Investor;
 import com.example.investor.model.InvestorWithPassword;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.investor.repository.WalletProxy;
+import java.util.List;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
 
 @Service
 public class InvestorService {
-  @Autowired
-  private InvestorRepository repository ;
+  private final InvestorRepository repository ;
 
+  private final WalletProxy walletProxy;
+  private final AuthProxy authProxy;
+
+  public InvestorService(InvestorRepository repository, WalletProxy walletProxy,
+      AuthProxy authProxy) {
+    this.repository = repository;
+    this.walletProxy = walletProxy;
+    this.authProxy = authProxy;
+  }
 
   public Investor getOne(String name){
    return repository.findById(name).orElse(null);
@@ -22,8 +35,14 @@ public class InvestorService {
   public boolean createOne(InvestorWithPassword investorWithPswrd){
     Investor investor= repository.findById(investorWithPswrd.getInvestor_data().getUsername()).orElse(null);
     if(investor == null) {
-      repository.save(investorWithPswrd.getInvestor_data());
-      return true;
+      investor=investorWithPswrd.getInvestor_data();
+      UnSafeCredentials unSafeCredentials = new UnSafeCredentials(investor.getUsername(),investorWithPswrd.getPassword());
+     ResponseEntity<Void> response =  authProxy.createCredential(investor.getUsername(),
+         unSafeCredentials);
+      if(response.getStatusCode().is2xxSuccessful()) {
+        repository.save(investorWithPswrd.getInvestor_data());
+        return true;
+      }
     }
     return false;
   }
@@ -40,9 +59,15 @@ public class InvestorService {
   public HttpStatus delete(String pseudo){
     Investor investor = repository.findById(pseudo).orElse(null);
     if(investor != null){
-      repository.deleteById(pseudo);
-
-      return HttpStatus.OK;
+      ResponseEntity<List<Order>>  response = walletProxy.getWallet(pseudo);
+      if(response.getStatusCode().is2xxSuccessful()){
+        ResponseEntity<Void> responseAuth = authProxy.deleteCredential(pseudo);
+        if(responseAuth.getStatusCode().is2xxSuccessful()) {
+          repository.deleteById(pseudo);
+          return HttpStatus.OK;
+        }
+      }
+      return HttpStatus.BAD_REQUEST;
     }
     return HttpStatus.NOT_FOUND;
   }

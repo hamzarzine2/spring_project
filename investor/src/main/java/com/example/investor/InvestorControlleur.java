@@ -4,6 +4,8 @@ import com.example.investor.model.Investor;
 import com.example.investor.model.InvestorWithPassword;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class InvestorControlleur {
 
-    @Autowired
-   private InvestorService service;
+   private final InvestorService service;
+
+  public InvestorControlleur (InvestorService service) {
+    this.service = service;
+  }
+
   @GetMapping("/investor/{username}")
   public ResponseEntity<Investor> getOne(@PathVariable String username) {
     Investor investor = service.getOne(username);
@@ -34,6 +40,7 @@ public class InvestorControlleur {
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
     boolean created = service.createOne(investorWithPswrd);
+
     if(!created)
       return new ResponseEntity<>(HttpStatus.CONFLICT);
 
@@ -42,7 +49,7 @@ public class InvestorControlleur {
 
   @PutMapping("/investor/{username}")
   public ResponseEntity<Investor> updateOne(@PathVariable String username, @RequestBody Investor investor) {
-    if(!isValid(investor,"investorwithpassword"))
+    if(!isValid(investor,"investorwithoutpassword"))
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     boolean updated = service.updateOne(investor);
     if(!updated)
@@ -53,24 +60,22 @@ public class InvestorControlleur {
   @DeleteMapping("/investor/{username}")
   public ResponseEntity<Investor> deleteOne(@PathVariable String username) {
     HttpStatus deleted = service.delete(username);
-
-    if(deleted.equals(HttpStatus.NOT_FOUND))
-      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    else
-      if(deleted.equals(HttpStatus.BAD_REQUEST))
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    return new ResponseEntity<>(HttpStatus.OK);
+    return new ResponseEntity<>(deleted);
   }
 
   public boolean isValid(Investor investor, String password){
-    if(password.equals("investorwithpassword") && password.isBlank())
+    if(!password.equals("investorwithoutpassword") && password.isBlank())
       return false;
 
+    String regex = ".{3,}@.{3,}";
+    Pattern pattern = Pattern.compile(regex);
+    Matcher matcher = pattern.matcher(investor.getEmail());
+
     return !investor.getBirthdate()
-        .isBlank()
+        .isBlank() && matcher.matches()
         && !investor.getEmail().isBlank() && !investor
         .getUsername().isBlank()
         && !investor.getLastname().isBlank() && !investor
-        .getFirstName().isBlank();
+        .getFirstname().isBlank();
   }
 }

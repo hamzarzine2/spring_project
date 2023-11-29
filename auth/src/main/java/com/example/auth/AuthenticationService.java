@@ -6,8 +6,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.example.authentification.models.SafeCredentials;
-import com.example.authentification.models.UnsafeCredentials;
+import com.example.auth.models.SafeCredentials;
+import com.example.auth.models.UnsafeCredentials;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ public class AuthenticationService {
 
     public AuthenticationService(AuthenticationRepository repository, AuthenticationProperties properties) {
         this.repository = repository;
-        this.jwtAlgorithm = Algorithm.HMAC512(properties.getSecret());
+        this.jwtAlgorithm = Algorithm.HMAC512( "t" );//properties.getSecret());
         this.jwtVerifier = JWT.require(this.jwtAlgorithm).withIssuer("auth0").build();
     }
 
