@@ -19,10 +19,8 @@ public class Price {
   @Column(nullable = false)
   private String ticker;
 
+  @Getter
   @Column(nullable = false)
   private int price;
 
-  public int getPrice(){
-    return price;
-  }
 }
