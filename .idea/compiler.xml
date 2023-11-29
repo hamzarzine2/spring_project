@@ -11,12 +11,21 @@
         <module name="auth" />
         <module name="Wallet" />
         <module name="order" />
+        <module name="matching" />
+      </profile>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.30/f195ee86e6c896ea47a1d39defbe20eb59cd149d/lombok-1.18.30.jar" />
+        </processorPath>
+        <module name="matching.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="matching" target="1.8" />
       <module name="Price" target="17" />
       <module name="product" target="17" />
+      <module name="wrong_matching" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

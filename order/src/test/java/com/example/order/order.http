@@ -1,0 +1,45 @@
+### good request
+POST http://localhost:9005/order
+Content-Type: application/json
+
+{
+  "owner": "boob",
+  "timestamp": 457696995,
+  "ticker": "APPL",
+  "quantity": 10,
+  "side": "SELL",
+  "type": "LIMIT",
+  "limit": 100,
+  "filled":9
+}
+
+### bas request
+POST http://localhost:9005/order
+Content-Type: application/json
+
+{
+"timestamp": 457696995,
+"ticker": "LNRD",
+"quantity": 10,
+"side": "SELL",
+"type": "LIMIT",
+"limit": 100,
+"filled": 0
+}
+
+### good request get
+GET http://localhost:9005/order/8f9c9dfe-f8f3-41e7-9a51-4145823a850e
+
+###good request
+PATCH http://localhost:9005/order/8f9c9dfe-f8f3-41e7-9a51-4145823a850e
+Content-Type: application/json
+
+{
+  "filled": 49
+}
+
+### good request
+GET http://localhost:9005/order/by-user/boob
+
+### good request
+GET http://localhost:9005/order/open/by-ticker/APPL/SELL
