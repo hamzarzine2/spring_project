@@ -2,7 +2,6 @@ package com.example.wallet;
 
 import com.example.wallet.models.Position;
 import com.example.wallet.models.PositionDTO;
-import com.example.wallet.repositories.InvestorProxy;
 import com.example.wallet.repositories.WalletRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,13 +11,10 @@ import org.springframework.stereotype.Service;
 public class WalletService {
 
   private final WalletRepository repository;
-  private final InvestorProxy investorproxy;
-
   private final PositionDTO positionDTO = new PositionDTO();
 
-  public WalletService(WalletRepository walletRepository, InvestorProxy investorproxy) {
+  public WalletService(WalletRepository walletRepository) {
     this.repository = walletRepository;
-    this.investorproxy = investorproxy;
   }
 
   /**
@@ -28,8 +24,6 @@ public class WalletService {
    */
   public double getNetWorth(String username) {
     double netWorth = 0;
-    if(investorproxy.getInvestor(username) == null) //TODO
-      return 0;
 
     for (Position position : repository.findAll()) {
       netWorth += position.getNetWorth();
