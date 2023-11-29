@@ -9,6 +9,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Position {
     private String ticker;
-    private int quantity;
-    private long unitValue;
+    private double quantity;
+    private double unitValue;
 }

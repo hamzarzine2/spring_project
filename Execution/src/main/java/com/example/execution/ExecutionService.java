@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class ExecutionService {
 
@@ -22,23 +25,44 @@ public class ExecutionService {
     private OrderProxy orderProxy;
 
     public boolean executeOrder(String ticker, String seller, String buyer, Transaction transaction) {
-        return executeUpdateStock(transaction, seller, "CASH",transaction.getQuantity()) &&
-                executeUpdateStock(transaction, buyer, "CASH", -transaction.getQuantity()) &&
-                executeUpdateStock(transaction, seller, ticker,-transaction.getQuantity()) &&
-                executeUpdateStock(transaction, buyer, ticker,-transaction.getQuantity()) &&
+        return executeupdateBuyer(transaction,buyer) && executeupdateSeller(transaction,seller) &&
                 handleResponse(priceProxy.updatePrice(ticker, transaction.getPrice())) &&
                 handleResponse(updateOrder(transaction.getBuy_order_guid(), transaction.getQuantity())) &&
                 handleResponse(updateOrder(transaction.getSell_order_guid(), transaction.getQuantity()));
     }
 
-    private boolean executeUpdateStock(Transaction transaction, String user, String ticker,int montant ) {
-        Position position = new Position();
-        position.setTicker(ticker);
-        //problème de moins ici
-        position.setQuantity(montant);
-        position.setUnitValue(transaction.getPrice());
-        ResponseEntity<Void> walletResponse = walletProxy.addPosition(user, position);
+    private boolean executeupdateSeller(Transaction transaction, String user){
+        List<Position> positionList = new ArrayList<>();
+        Position positionTicket = new Position();
+        positionTicket.setTicker(transaction.getTicker());
+        positionTicket.setQuantity(- transaction.getQuantity());
+        positionTicket.setUnitValue(transaction.getPrice());
+        Position positionCash = createPositionCash(transaction.getPrice());
+
+        positionList.add(positionTicket);
+        positionList.add(positionCash);
+        ResponseEntity<Void> walletResponse = walletProxy.addPosition(user, positionList);
         return handleResponse(walletResponse);
+    }
+    private boolean executeupdateBuyer(Transaction transaction, String user ){
+        List<Position> positionList = new ArrayList<>();
+        Position positionTicket = new Position();
+        positionTicket.setTicker(transaction.getTicker());
+        positionTicket.setQuantity(transaction.getQuantity());
+        positionTicket.setUnitValue(transaction.getPrice());
+        Position positionCash = createPositionCash(-transaction.getPrice());
+        positionList.add(positionTicket);
+        positionList.add(positionCash);
+        ResponseEntity<Void> walletResponse = walletProxy.addPosition(user, positionList);
+        return handleResponse(walletResponse);
+    }
+
+    private Position createPositionCash(double amount){
+        Position positionCash = new Position();
+        positionCash.setTicker("CASH");
+        positionCash.setQuantity(amount);
+        positionCash.setUnitValue(1);
+        return positionCash;
     }
 
     private boolean handleResponse(ResponseEntity<Void> response) {

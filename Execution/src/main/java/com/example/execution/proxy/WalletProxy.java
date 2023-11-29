@@ -6,11 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Repository
 @FeignClient(name = "wallet")
 public interface WalletProxy {
     @PostMapping("/wallet/{username}")
-    ResponseEntity<Void> addPosition(@PathVariable String username, @RequestBody Position position) ;
+    ResponseEntity<Void> addPosition(@PathVariable String username, @RequestBody List<Position> position) ;
 
 
 
