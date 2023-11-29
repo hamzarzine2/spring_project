@@ -7,3 +7,4 @@ insert into positions (ticker, quantity, price, date) values ('PLZ', 10, 20, '20
 insert into positions (ticker, quantity, price, date) values ('PNIG', 100, 20, '2019-01-06');
 insert into positions (ticker, quantity, price, date) values ('NAS', 10, 20, '2019-01-06');
 insert into positions (ticker, quantity, price, date) values ('PL', 100, 20, '2019-01-06');
+insert into positions (ticker, quantity, price, date) values ('PL', 100, 20, '2019-01-06');

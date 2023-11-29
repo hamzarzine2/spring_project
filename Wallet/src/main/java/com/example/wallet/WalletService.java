@@ -1,5 +1,7 @@
 package com.example.wallet;
 
+import com.example.wallet.models.Position;
+import com.example.wallet.models.PositionDTO;
 import com.example.wallet.repositories.InvestorProxy;
 import com.example.wallet.repositories.WalletRepository;
 import java.util.List;
@@ -10,6 +12,8 @@ public class WalletService {
 
   private final WalletRepository repository;
   private final InvestorProxy investorproxy;
+
+  private final PositionDTO positionDTO = new PositionDTO();
 
   public WalletService(WalletRepository walletRepository, InvestorProxy investorproxy) {
     this.repository = walletRepository;
@@ -52,26 +56,27 @@ public class WalletService {
   /**
    * Add one or more positions to the user's wallet.
    * @param username of the user
-   * @param positions containing the positions to add AND the price in CASH to remove from the wallet
+   * @param positionDTOs containing the positions to add AND the price in CASH to remove from the wallet
    *                  concerning the price of the positions
    * @return the content of the wallet after the operation
    */
-  public List<Position> addPosition(String username, List<Position> positions){
-    if (positions == null || positions.isEmpty())
+  public List<PositionDTO> addPosition(String username, List<PositionDTO> positionDTOs){
+    if (positionDTOs == null || positionDTOs.isEmpty())
       return null;
-    List<Position> positionList = repository.getAllPositions();
-
-    for (Position position : positions) {
-      Position existingPosition = repository.findById(position.getTicker()).orElse(null);
-
-      if (existingPosition == null) {
-        repository.save(position);
-        positionList.add(position);
+    List<PositionDTO> positionList = null;
+    for (PositionDTO dto : positionDTOs) {
+      Position position = repository.getAllUserPositions(username, dto.getTicker());
+      if(position == null){
+        position = new Position();
+        position.setUsername(username);
+        position.setTicker(dto.getTicker());
+        position.setQuantity(dto.getQuantity());
+        position.setUnitValue(dto.getUnitValue());
       } else {
-        existingPosition.setQuantity(position.getQuantity() + existingPosition.getQuantity());
-        repository.save(existingPosition);
-        positionList.add(existingPosition);
+        position.setQuantity(position.getQuantity() + dto.getQuantity());
       }
+      repository.save(position);
+      positionList.add(positionDTO.toDto(position));
     }
     return positionList;
   }
