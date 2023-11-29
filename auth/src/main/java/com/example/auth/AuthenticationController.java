@@ -10,6 +10,9 @@ import java.util.Objects;
 @RestController
 public class AuthenticationController {
 
+
+
+
     private final AuthenticationService service;
 
     public AuthenticationController(AuthenticationService service) {
@@ -21,7 +24,7 @@ public class AuthenticationController {
     public ResponseEntity<String> connect(@RequestBody UnsafeCredentials credentials) {
         if (credentials.invalid()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        String token =  service.connect(credentials);
+        String token =  service.connect(credentials );
 
         if (token == null) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         return new ResponseEntity<>(token, HttpStatus.OK);
@@ -39,11 +42,10 @@ public class AuthenticationController {
 
     @PostMapping("/authentication/{pseudo}")
     public ResponseEntity<Void> createOne(@PathVariable String pseudo, @RequestBody UnsafeCredentials credentials) {
+
         if (!Objects.equals(credentials.getPseudo(), pseudo)) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         if (credentials.invalid()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
         boolean created = service.createOne(credentials);
-
         if (!created) return new ResponseEntity<>(HttpStatus.CONFLICT);
         else return new ResponseEntity<>(HttpStatus.CREATED);
     }

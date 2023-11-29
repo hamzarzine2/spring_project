@@ -1,0 +1,34 @@
+### good request
+POST http://localhost:9001/investor/dd
+Content-Type: application/json
+
+{
+  "password": "123",
+  "investor_data": {
+  "username": "dd",
+  "firstname": "oussama",
+  "lastname": "elBoubou",
+  "birthdate": "01/02/2012",
+  "email": "oussama"
+}
+}
+
+
+### bas request
+PUT http://localhost:9001/investor/sourrli
+Content-Type: application/json
+
+{
+  "username": "sidd",
+  "firstname": "oussama",
+  "lastname": "elBoubou",
+  "birthdate": "01/02/2012",
+  "email": "oussama@gmail.com"
+}
+
+### good request get
+GET http://localhost:9001/investor/souli
+
+###good request
+DELETE http://localhost:9001/investor/souli
+
