@@ -2,7 +2,13 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/Eureka/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Eureka/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Price/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Wallet/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/auth/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/auth/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/matching/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/matching/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/order/src/main/java" charset="UTF-8" />
   </component>
 </project>
