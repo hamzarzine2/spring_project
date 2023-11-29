@@ -1,11 +1,13 @@
 ###good request
-POST http://localhost:9006/execute/{{ticker}}/{{seller}}/{{buyer}}
+POST http://localhost:9006/execute/AAPL/Jacques/Jean
+Content-Type: application/json
+
 {
   "ticker": "AAPL",
-  "seller": "picsous",
-  "buyer": "cresus",
-  "buy_order_guid": "6B29FC40-CA47-1067-B31D-00DD010662DA",
-  "sell_order_guid": "550e8400-e29b-41d4-a716-446655440000",
+  "seller": "Jacques",
+  "buyer": "Jean",
+  "buy_order_guid": "8f9c9dfe-f8f3-41e7-9a51-4995823a8544",
+  "sell_order_guid": "8f9c9dfe-f8f3-41e7-0000-1145823a850e",
   "quantity": 10,
   "price": 100
 }

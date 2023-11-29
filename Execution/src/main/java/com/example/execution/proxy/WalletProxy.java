@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Repository
-@FeignClient(name = "wallets")
+@FeignClient(name = "wallets", url = "http://localhost:9007")
 public interface WalletProxy {
     @PostMapping("/wallet/{username}")
-    ResponseEntity<Void> addPosition(@PathVariable String username, @RequestBody List<Position> position) ;
+    ResponseEntity<List<Position>> addPosition(@PathVariable String username, @RequestBody List<Position> position) ;
 
 
 

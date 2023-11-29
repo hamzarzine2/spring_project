@@ -25,10 +25,11 @@ public class ExecutionService {
     private OrderProxy orderProxy;
 
     public boolean executeOrder(String ticker, String seller, String buyer, Transaction transaction) {
+        System.out.println("testestest");
         return executeupdateBuyer(transaction,buyer) && executeupdateSeller(transaction,seller) &&
                 handleResponse(priceProxy.updatePrice(ticker, transaction.getPrice())) &&
-                handleResponse(updateOrder(transaction.getBuy_order_guid(), transaction.getQuantity())) &&
-                handleResponse(updateOrder(transaction.getSell_order_guid(), transaction.getQuantity()));
+                updateOrder(transaction.getBuy_order_guid(), transaction.getQuantity()) &&
+                updateOrder(transaction.getSell_order_guid(), transaction.getQuantity());
     }
 
     private boolean executeupdateSeller(Transaction transaction, String user){
@@ -41,8 +42,8 @@ public class ExecutionService {
 
         positionList.add(positionTicket);
         positionList.add(positionCash);
-        ResponseEntity<Void> walletResponse = walletProxy.addPosition(user, positionList);
-        return handleResponse(walletResponse);
+        ResponseEntity<List<Position>> walletResponse = walletProxy.addPosition(user, positionList);
+        return true;
     }
     private boolean executeupdateBuyer(Transaction transaction, String user ){
         List<Position> positionList = new ArrayList<>();
@@ -53,8 +54,8 @@ public class ExecutionService {
         Position positionCash = createPositionCash(-transaction.getPrice());
         positionList.add(positionTicket);
         positionList.add(positionCash);
-        ResponseEntity<Void> walletResponse = walletProxy.addPosition(user, positionList);
-        return handleResponse(walletResponse);
+        ResponseEntity<List<Position>> walletResponse = walletProxy.addPosition(user, positionList);
+        return true;
     }
 
     private Position createPositionCash(double amount){
@@ -69,7 +70,7 @@ public class ExecutionService {
         return !response.getStatusCode().isError();
     }
 
-    private ResponseEntity<Void> updateOrder(String orderId, int quantity) {
-        return orderProxy.updateOrder(orderId, quantity);
+    private boolean updateOrder(String orderId, int quantity) {
+        return orderProxy.updateOrder(orderId, quantity).getStatusCode().isError();
     }
 }
