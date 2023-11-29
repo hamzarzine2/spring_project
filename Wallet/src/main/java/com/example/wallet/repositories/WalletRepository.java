@@ -13,6 +13,6 @@ public interface WalletRepository extends CrudRepository<Position, String>{
   @Query("select p from positions p where p.username =: username and p.ticker =: ticker ")
   Position getUserPosition(@Param("username") String username, @Param("ticker") String ticker);
 
-  @Query("select p from positions p where p.username = ?")
-  List<Position> getAllUserPositions(String username);
+  @Query("select p from positions p where p.username =: username")
+  List<Position> getAllUserPositions(@Param("username")String username);
 }
