@@ -16,7 +16,7 @@ public class WalletController {
     }
 
     @GetMapping("/wallet/{username}/net-worth")
-    public ResponseEntity<Double> getNetWorth(@PathVariable String username) {
+    public ResponseEntity<Double> getNetWorth(@PathVariable("username") String username) {
         double netWorth = service.getNetWorth(username);
         return new ResponseEntity<>(netWorth, HttpStatus.OK);
     }

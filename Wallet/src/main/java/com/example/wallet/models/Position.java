@@ -25,7 +25,7 @@ public class Position {
   @Column(nullable = false)
   private double quantity;
 
-  @Column(nullable = false)
+  @Column(name = "unit_value")
   private double unitValue;
 
   @Column(nullable = false)
@@ -35,10 +35,4 @@ public class Position {
     return quantity * unitValue;
   }
 
-  public Position toEntity(PositionDTO positionDTO) {
-    this.ticker = positionDTO.getTicker();
-    this.quantity = positionDTO.getQuantity();
-    this.unitValue = positionDTO.getUnitValue();
-    return this;
-  }
 }

@@ -24,7 +24,7 @@ public class WalletService {
    */
   public double getNetWorth(String username) {
     double netWorth = 0;
-    List<Position> positions = repository.getAllUserPositions(username);
+    List<Position> positions = repository.getAllByUsernameEquals(username);
     for (Position position : positions) {
       netWorth += position.getQuantity() * position.getUnitValue();
     }
@@ -37,7 +37,7 @@ public class WalletService {
    * @return a list of opened positions
    */
   public List<PositionDTO> getOpenedPositions(String username){
-    List<Position> positions = repository.getAllUserPositions(username);
+    List<Position> positions = repository.getAllByUsernameEquals(username);
     List<PositionDTO> positionDTOs = new ArrayList<>();
 
     for (Position position : positions) {

@@ -1,2 +1,2 @@
-### get all positions
-GET http://localhost:9006/positions/getAllPositions
+### get all positions from Jacques
+GET http://localhost:9007/wallet/Jacques/net-worth
