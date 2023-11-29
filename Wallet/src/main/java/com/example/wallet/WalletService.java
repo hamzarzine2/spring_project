@@ -24,9 +24,9 @@ public class WalletService {
    */
   public double getNetWorth(String username) {
     double netWorth = 0;
-
-    for (Position position : repository.findAll()) {
-      netWorth += position.getNetWorth();
+    List<Position> positions = repository.getAllUserPositions(username);
+    for (Position position : positions) {
+      netWorth += position.getQuantity() * position.getUnitValue();
     }
     return netWorth;
   }

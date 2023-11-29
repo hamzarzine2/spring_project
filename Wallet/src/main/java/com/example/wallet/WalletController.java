@@ -15,7 +15,6 @@ public class WalletController {
         this.service = walletService;
     }
 
-    //todo vérifier cette méthode
     @GetMapping("/wallet/{username}/net-worth")
     public ResponseEntity<Double> getNetWorth(@PathVariable String username) {
         double netWorth = service.getNetWorth(username);

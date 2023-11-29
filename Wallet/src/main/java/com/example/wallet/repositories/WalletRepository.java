@@ -15,7 +15,4 @@ public interface WalletRepository extends CrudRepository<Position, String>{
 
   @Query("select p from positions p where p.username = ?")
   List<Position> getAllUserPositions(String username);
-
-  @Query("select sum(p.quantity*p.unitValue) from positions p where p.username = ?")
-  double getNetWorth(String username);
 }
