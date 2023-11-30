@@ -17,15 +17,12 @@ public class PriceService {
    * @return the price
    */
   public int getLastPrice(String ticker) {
-    //todo verify that the ticket exists
-
-    return repository.findById(ticker).get().getPrice();
+    return repository.findByPrice(ticker);
   }
 
   public int updatePrice(int newPrice, String ticker){
     if (newPrice < 0) return -1;
-    int price = repository.findById(ticker).get().getPrice();
-    repository.findById(ticker).get().setPrice(price);
+    int price = repository.findByPrice(ticker);
     return newPrice;
   }
 

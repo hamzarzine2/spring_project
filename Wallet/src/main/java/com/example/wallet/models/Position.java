@@ -33,9 +33,4 @@ public class Position {
 
   @Column(nullable = false)
   private String username;
-
-  public double getNetWorth() {
-    return quantity * unitValue;
-  }
-
 }

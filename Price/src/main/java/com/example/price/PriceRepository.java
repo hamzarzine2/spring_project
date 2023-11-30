@@ -1,9 +1,9 @@
 package com.example.price;
 
+import com.example.price.models.Price;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface PriceRepository extends CrudRepository<Price, String> {
 
+  int findByPrice(String ticker);
 }
