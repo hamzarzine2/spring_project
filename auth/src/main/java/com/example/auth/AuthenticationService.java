@@ -20,7 +20,7 @@ public class AuthenticationService {
 
     public AuthenticationService(AuthenticationRepository repository, AuthenticationProperties properties) {
         this.repository = repository;
-        this.jwtAlgorithm = Algorithm.HMAC512( "t" );//properties.getSecret());
+        this.jwtAlgorithm = Algorithm.HMAC512(properties.getSecret());
         this.jwtVerifier = JWT.require(this.jwtAlgorithm).withIssuer("auth0").build();
     }
 

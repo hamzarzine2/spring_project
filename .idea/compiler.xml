@@ -23,7 +23,6 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="matching" target="1.8" />
       <module name="Price" target="17" />
       <module name="product" target="17" />
       <module name="wrong_matching" target="17" />
