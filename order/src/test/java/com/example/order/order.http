@@ -3,9 +3,9 @@ POST http://localhost:9005/order
 Content-Type: application/json
 
 {
-  "owner": "boob",
+  "owner": "body",
   "timestamp": 457696995,
-  "ticker": "APPL",
+  "ticker": "AAPL",
   "quantity": 10,
   "side": "SELL",
   "type": "LIMIT",
@@ -13,11 +13,12 @@ Content-Type: application/json
   "filled":9
 }
 
-### bas request
+### bad request
 POST http://localhost:9005/order
 Content-Type: application/json
 
 {
+  "owner": "",
 "timestamp": 457696995,
 "ticker": "LNRD",
 "quantity": 10,
@@ -29,6 +30,8 @@ Content-Type: application/json
 
 ### good request get
 GET http://localhost:9005/order/8f9c9dfe-f8f3-41e7-9a51-4145823a850e
+### bad request get
+GET http://localhost:9005/order/8f9c9dfe-f8f3-41e7-9a51-41
 
 ###good request
 PATCH http://localhost:9005/order/8f9c9dfe-f8f3-41e7-9a51-4145823a850e
@@ -37,9 +40,31 @@ Content-Type: application/json
 {
   "filled": 49
 }
+###bad request with bad guid
+PATCH http://localhost:9005/order/8f9c9dfe-f8f3-41rearzezar
+Content-Type: application/json
 
+{
+  "filled": 4
+}
+### bad request negatif filled
+PATCH http://localhost:9005/order/8f9c9dfe-f8f3-41e7-9a51-4145823a850e
+Content-Type: application/json
+
+{
+  "filled": -23
+}
 ### good request
 GET http://localhost:9005/order/by-user/boob
 
-### good request
-GET http://localhost:9005/order/open/by-ticker/APPL/SELL
+### bad request with unknown user
+GET http://localhost:9005/order/by-user/booberuirzeuio
+
+### good request as sell
+GET http://localhost:9005/order/open/by-ticker/AAPL/SELL
+
+### good request as buy
+GET http://localhost:9005/order/open/by-ticker/AAPL/BUY
+
+### bad request with wrong side
+GET http://localhost:9005/order/open/by-ticker/APPL/BUYER

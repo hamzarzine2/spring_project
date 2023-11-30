@@ -27,7 +27,7 @@ public class WalletController {
         return new ResponseEntity<>(positions, HttpStatus.OK);
     }
 
-    @PatchMapping("/wallet/{username}")
+    @PostMapping("/wallet/{username}")
     public ResponseEntity<List<PositionDTO>> addPosition(@PathVariable String username, @RequestBody
         List<PositionDTO> positionDTOs) {
         return new ResponseEntity<>(service.addPosition(username, positionDTOs), HttpStatus.OK);

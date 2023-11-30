@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/gateway/gateway.iml" filepath="$PROJECT_DIR$/gateway/gateway.iml" />
+=======
+>>>>>>> abb04830310104660f9921673697f52ed3bb6681
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/matching.test.iml" filepath="$PROJECT_DIR$/.idea/modules/matching.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring_project.iml" filepath="$PROJECT_DIR$/spring_project.iml" />
     </modules>
