@@ -1,8 +1,9 @@
 package org.example;
 
+import java.util.List;
+
 import com.example.order.Model.Order;
 import com.example.order.Model.Side;
-import java.util.List;
 import org.example.proxies.ExecutionProxy;
 import org.example.proxies.OrderProxy;
 import org.example.proxies.PriceProxy;

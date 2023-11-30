@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Repository
-@FeignClient
+@FeignClient(name = "Execution")
 public interface ExecutionProxy {
 
   @PostMapping("/execute/{ticker}/{seller}/{buyer}")

@@ -11,8 +11,8 @@
         <module name="Price" />
         <module name="auth" />
         <module name="Wallet" />
-        <module name="order" />
         <module name="matching" />
+        <module name="order" />
       </profile>
       <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />
@@ -24,6 +24,8 @@
     <bytecodeTargetLevel>
       <module name="AAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHH" target="1.8" />
       <module name="gateway" target="17" />
+      <module name="order (1)" target="17" />
+      <module name="order (2)" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -32,7 +34,10 @@
       <module name="Price" options="-parameters" />
       <module name="Wallet" options="-parameters" />
       <module name="auth" options="-parameters" />
+      <module name="matching" options="-parameters" />
       <module name="order" options="-parameters" />
+      <module name="order (1)" options="-parameters" />
+      <module name="order (2)" options="-parameters" />
     </option>
   </component>
 </project>
