@@ -20,12 +20,12 @@ public class Price {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(nullable = false)
-  private int Id;
+  private int id;
 
   @Column(nullable = false)
   private String ticker;
 
   @Getter
   @Column(nullable = false)
-  private int price;
+  private double price;
 }

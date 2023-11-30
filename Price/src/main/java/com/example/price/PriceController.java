@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -16,16 +17,18 @@ public class PriceController {
   }
 
   @GetMapping("/price/{ticker}")
-  public ResponseEntity<Integer> getLastPrice(@PathVariable String ticker){
-    int lastPrice = service.getLastPrice(ticker);
+  public ResponseEntity<Double> getLastPrice(@PathVariable String ticker){
+    double lastPrice = service.getLastPrice(ticker);
+    if (lastPrice == -1)
+      return new ResponseEntity<>(1.0, HttpStatus.OK);
     return new ResponseEntity<>(lastPrice, HttpStatus.OK);
   }
 
   @PatchMapping("/price/{ticker}")
-  public ResponseEntity<Integer> updatePrice(@PathVariable String ticker, int newPrice){
-    if (service.updatePrice(newPrice, ticker) == -1)
+  public ResponseEntity<Double> updatePrice(@PathVariable String ticker, @RequestBody double newPrice) {
+    if (newPrice < 0)
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
+    service.updatePrice(newPrice, ticker);
     return new ResponseEntity<>(newPrice, HttpStatus.OK);
   }
 }

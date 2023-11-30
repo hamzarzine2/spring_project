@@ -1,1 +1,13 @@
-GET http://localhost:9008/price/AAPL
+### get the price of NFLX
+GET http://localhost:9008/price/NFLX
+
+### get the price of DFET (non-existent)
+GET http://localhost:9008/price/DFET
+
+### set the price of NFLX
+PATCH http://localhost:9008/price/NFLX
+Content-Type: application/json
+
+{
+    "newPrice": 100
+}

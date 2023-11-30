@@ -1,11 +1,14 @@
 package com.example.price;
 
+import com.example.price.models.Price;
+import com.example.price.models.PriceDTO;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PriceService {
 
   private final PriceRepository repository;
+  private PriceDTO priceDTO = new PriceDTO();
 
   public PriceService(PriceRepository priceRepository) {
     this.repository = priceRepository;
@@ -16,13 +19,14 @@ public class PriceService {
    * @param ticker
    * @return the price
    */
-  public int getLastPrice(String ticker) {
-    return repository.findByPrice(ticker);
+  public double getLastPrice(String ticker) {
+    Price price = repository.findPriceByTicker(ticker);
+    if (price == null) return -1;
+    return price.getPrice();
   }
 
-  public int updatePrice(int newPrice, String ticker){
-    if (newPrice < 0) return -1;
-    int price = repository.findByPrice(ticker);
+  public double updatePrice(double newPrice, String ticker){
+    repository.updatePriceByTicker(ticker, newPrice);
     return newPrice;
   }
 
