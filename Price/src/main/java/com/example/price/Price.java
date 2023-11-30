@@ -1,4 +1,4 @@
-package com.example.price.models;
+package com.example.price;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

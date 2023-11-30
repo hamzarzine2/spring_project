@@ -25,8 +25,8 @@ public class OrderService {
 
     public boolean updateOne(String guid, int filled) {
         Order order = readOne(guid);
-        if (order == null) return false;
-        order.setFilled(order.getFilled()+ filled);
+        if (order == null || order.getFilled()+filled>order.getQuantity()) return false;
+        order.setFilled(order.getFilled() + filled);
         orderRepository.save(order);
         return true;
     }

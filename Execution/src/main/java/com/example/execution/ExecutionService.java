@@ -1,5 +1,6 @@
 package com.example.execution;
 
+import com.example.execution.model.Order;
 import com.example.execution.model.Position;
 import com.example.execution.model.Transaction;
 import com.example.execution.proxy.OrderProxy;
@@ -25,13 +26,15 @@ public class ExecutionService {
     private OrderProxy orderProxy;
 
     public boolean executeOrder(String ticker, String seller, String buyer, Transaction transaction) {
-        System.out.println("testestest");
-        orderProxy.updateOrder(transaction.getBuy_order_guid(), 12);
+        try {
+            return  executeupdateBuyer(transaction,buyer) && executeupdateSeller(transaction,seller) &&
+                    handleResponse(priceProxy.updatePrice(ticker, transaction.getPrice())) &&
+                    updateOrder(transaction.getBuy_order_guid(), transaction.getQuantity()) &&
+                    updateOrder(transaction.getSell_order_guid(), transaction.getQuantity());
+        } catch (Exception e) {
+            return false;
+        }
 
-        return executeupdateBuyer(transaction,buyer) && executeupdateSeller(transaction,seller) &&
-                handleResponse(priceProxy.updatePrice(ticker, transaction.getPrice())) &&
-                updateOrder(transaction.getBuy_order_guid(), transaction.getQuantity()) &&
-                updateOrder(transaction.getSell_order_guid(), transaction.getQuantity());
     }
 
     private boolean executeupdateSeller(Transaction transaction, String user){
@@ -45,6 +48,7 @@ public class ExecutionService {
         positionList.add(positionTicket);
         positionList.add(positionCash);
         ResponseEntity<List<Position>> walletResponse = walletProxy.addPosition(user, positionList);
+        System.out.println(walletResponse.getStatusCode());
         return true;
     }
     private boolean executeupdateBuyer(Transaction transaction, String user ){
@@ -57,6 +61,7 @@ public class ExecutionService {
         positionList.add(positionTicket);
         positionList.add(positionCash);
         ResponseEntity<List<Position>> walletResponse = walletProxy.addPosition(user, positionList);
+        System.out.println(walletResponse.getStatusCode());
         return true;
     }
 
@@ -69,10 +74,13 @@ public class ExecutionService {
     }
 
     private boolean handleResponse(ResponseEntity<Void> response) {
+        System.out.println(!response.getStatusCode().isError());
         return !response.getStatusCode().isError();
     }
 
     private boolean updateOrder(String orderId, int quantity) {
-        return orderProxy.updateOrder(orderId, quantity).getStatusCode().isError();
+        Order orderTemp = new Order();
+        orderTemp.setFilled(quantity);
+        return !orderProxy.updateOrder(orderId, orderTemp).getStatusCode().isError();
     }
 }

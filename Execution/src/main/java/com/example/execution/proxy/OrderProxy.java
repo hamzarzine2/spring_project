@@ -16,7 +16,7 @@ import java.util.List;
 public interface OrderProxy {
 
     @PatchMapping("/order/{guid}")
-    ResponseEntity<Order> updateOrder(@PathVariable String guid, @RequestBody int filledQuantity);
+    ResponseEntity<Order> updateOrder(@PathVariable String guid, @RequestBody Order order);
 
 
 }

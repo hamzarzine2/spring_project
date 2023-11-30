@@ -30,6 +30,7 @@ public class WalletController {
     @PostMapping("/wallet/{username}")
     public ResponseEntity<List<PositionDTO>> addPosition(@PathVariable String username, @RequestBody
         List<PositionDTO> positionDTOs) {
+        System.out.println("entering addPosition");
         return new ResponseEntity<>(service.addPosition(username, positionDTOs), HttpStatus.OK);
     }
 }

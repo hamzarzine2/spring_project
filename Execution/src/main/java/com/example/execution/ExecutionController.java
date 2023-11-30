@@ -23,6 +23,7 @@ public class ExecutionController {
         System.out.println("testestest");
 
         boolean result = executionService.executeOrder(ticker, seller, buyer, transaction);
+        System.out.println(result);
         return result? new  ResponseEntity<>(HttpStatus.OK):new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 

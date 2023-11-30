@@ -1,6 +1,5 @@
 package com.example.price;
 
-import com.example.price.models.Price;
 import org.springframework.stereotype.Service;
 
 @Service

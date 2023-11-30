@@ -36,7 +36,9 @@ public class OrderController {
 
     @PatchMapping("/order/{guid}")
     public ResponseEntity<Order> updateOne(@PathVariable("guid") String guid, @RequestBody Order orderValue) {
+        System.out.println("entering updateOne");
         int filledValue = orderValue.getFilled();
+        System.out.println(filledValue);
         if(filledValue<0) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         return orderService.updateOne(guid,filledValue) ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
