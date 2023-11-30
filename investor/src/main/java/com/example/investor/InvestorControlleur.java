@@ -4,6 +4,7 @@ import com.example.investor.model.Investor;
 import com.example.investor.model.InvestorWithPassword;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +31,16 @@ public class InvestorControlleur {
   public ResponseEntity<Investor> getOne(@PathVariable String username) {
     Investor investor = service.getOne(username);
     if(investor == null)
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     return new ResponseEntity<>(investor,HttpStatus.OK);
   }
+
+  @GetMapping("/investor/all")
+  public ResponseEntity<List<Investor>> getALL() {
+    List<Investor> investors = service.getALL();
+    return new ResponseEntity<>(investors,HttpStatus.OK);
+  }
+
 
   @PostMapping("/investor/{username}")
   public ResponseEntity<Investor> createOne(@PathVariable String username,@RequestBody InvestorWithPassword investorWithPswrd) {
@@ -64,15 +72,14 @@ public class InvestorControlleur {
   }
 
   public boolean isValid(Investor investor, String password){
-    if(!password.equals("investorwithoutpassword") && password.isBlank())
-      return false;
+
 
     String regex = ".{3,}@.{3,}";
     Pattern pattern = Pattern.compile(regex);
     Matcher matcher = pattern.matcher(investor.getEmail());
 
     return !investor.getBirthdate()
-        .isBlank() && matcher.matches()
+        .isBlank() && matcher.matches() &&  !password.isBlank()
         && !investor.getEmail().isBlank() && !investor
         .getUsername().isBlank()
         && !investor.getLastname().isBlank() && !investor

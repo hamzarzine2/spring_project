@@ -104,10 +104,10 @@ public class GatewayController {
   }
 
   @PostMapping("/order")
-  public ResponseEntity<Void> makeAnOrder() {
+  public ResponseEntity<Order> makeAnOrder(@RequestBody Order order) {
     try {
-      service.placeAnOrder();
-      return new ResponseEntity<>(HttpStatus.OK);
+      service.placeAnOrder(order);
+      return new ResponseEntity<>(order, HttpStatus.OK);
     } catch (BadRequestException e) {
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }

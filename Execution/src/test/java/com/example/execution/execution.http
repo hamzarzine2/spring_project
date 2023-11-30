@@ -1,0 +1,83 @@
+###good request
+POST http://localhost:9006/execute/AAPL/Jacques/Jean
+Content-Type: application/json
+
+{
+  "ticker": "AAPL",
+  "seller": "Jacques",
+  "buyer": "Jean",
+  "buy_order_guid": "8f9c9dfe-f8f3-41e7-9a51-4995823a854e",
+  "sell_order_guid":"8f9c9dfe-f8f3-41e7-0a0e-1145823a850e",
+  "quantity": 1,
+  "price": 1009
+}
+
+###good request to test the change of the order for jacques
+GET http://localhost:9005/order/8f9c9dfe-f8f3-41e7-0a0e-1145823a850e
+
+###check the update of the wallet for jacques
+GET http://localhost:9007/wallet/Jacques
+
+###check the update of the wallet for jean
+GET http://localhost:9007/wallet/Jean
+
+
+
+###bad request unknown buy order guid
+POST http://localhost:9006/execute/AAPL/Jacques/Jean
+Content-Type: application/json
+
+{
+  "ticker": "AAPL",
+  "seller": "Jacques",
+  "buyer": "Jean",
+  "buy_order_guid": "8f9creererzre9dfe-f8f3-re1-4995823a854e",
+  "sell_order_guid":"8f9c9dfe-f8f3-41e7-0a0e-1145823a850e",
+  "quantity": 10,
+  "price": 100
+}
+
+
+###bad request unknown sell order guid
+POST http://localhost:9006/execute/AAPL/Jacques/Jean
+Content-Type: application/json
+
+{
+  "ticker": "AAPL",
+  "seller": "Jacques",
+  "buyer": "Jean",
+  "buy_order_guid": "8f9c9dfe-f8f3-41e7-9a51-4995823a854e",
+  "sell_order_guid":"8f9c9dfe-f8f3-41e7-0a0e-1145823a8reazrezar50e",
+  "quantity": 10,
+  "price": 100
+}
+
+###bad request with negative quantity
+POST http://localhost:9006/execute/AAPL/Jacques/Jean
+Content-Type: application/json
+
+{
+  "ticker": "AAPL",
+  "seller": "Jacques",
+  "buyer": "Jean",
+  "buy_order_guid": "8f9c9dfe-f8f3-41e7-9a51-4995823a854e",
+  "sell_order_guid":"8f9c9dfe-f8f3-41e7-0a0e-1145823a850e",
+  "quantity": -112,
+  "price": 100
+}
+
+###bad request with negative price
+POST http://localhost:9006/execute/AAPL/Jacques/Jean
+Content-Type: application/json
+
+{
+  "ticker": "AAPL",
+  "seller": "Jacques",
+  "buyer": "Jean",
+  "buy_order_guid": "8f9c9dfe-f8f3-41e7-9a51-4995823a854e",
+  "sell_order_guid":"8f9c9dfe-f8f3-41e7-0a0e-1145823a850e",
+  "quantity": 1,
+  "price": -100
+}
+
+

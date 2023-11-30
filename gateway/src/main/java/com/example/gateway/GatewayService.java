@@ -238,8 +238,16 @@ public class GatewayService {
    *
    * @throws BadRequestException if the order is invalid
    */
-  public void placeAnOrder() throws BadRequestException {
+  public Order placeAnOrder(Order order) throws BadRequestException {
     Order o = new Order();
+    o.setOwner(order.getOwner());
+    o.setTimestamp(order.getTimestamp());
+    o.setTicker(order.getTicker());
+    o.setQuantity(order.getQuantity());
+    o.setSide(order.getSide());
+    o.setType(order.getType());
+    o.setLimit(order.getLimit());
+    o.setFilled(order.getFilled());
     try {
       orderProxy.makeAnOrder(o);
     } catch (FeignException e) {
@@ -247,6 +255,7 @@ public class GatewayService {
         throw new BadRequestException();
       }
     }
+    return o;
   }
 
   /**

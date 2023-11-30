@@ -1,5 +1,6 @@
 package com.example.investor;
 
+import com.example.investor.model.PositionDTO;
 import com.example.investor.model.UnSafeCredentials;
 import com.example.investor.model.Order;
 import com.example.investor.repository.AuthProxy;
@@ -32,6 +33,9 @@ public class InvestorService {
    return repository.findById(name).orElse(null);
   }
 
+  public List<Investor> getALL(){
+    return (List<Investor>) repository.findAll();
+  }
   public boolean createOne(InvestorWithPassword investorWithPswrd){
     Investor investor= repository.findById(investorWithPswrd.getInvestor_data().getUsername()).orElse(null);
     if(investor == null) {
@@ -59,7 +63,7 @@ public class InvestorService {
   public HttpStatus delete(String pseudo){
     Investor investor = repository.findById(pseudo).orElse(null);
     if(investor != null){
-      ResponseEntity<List<Order>>  response = walletProxy.getWallet(pseudo);
+      ResponseEntity<List<PositionDTO>>  response = walletProxy.getWallet(pseudo);
       if(response.getStatusCode().is2xxSuccessful()){
         ResponseEntity<Void> responseAuth = authProxy.deleteCredential(pseudo);
         if(responseAuth.getStatusCode().is2xxSuccessful()) {

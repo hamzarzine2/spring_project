@@ -40,18 +40,10 @@ public class WalletService {
     List<Position> positions = repository.getAllByUsernameEquals(username);
     List<PositionDTO> positionDTOs = new ArrayList<>();
 
-    System.out.println("Positions: " + positions);
-    System.out.println("PositionDTOs: " + positionDTOs);
-
     for (Position position : positions) {
-      System.out.println("current position : " + position);
       PositionDTO currentPosition = new PositionDTO();
       currentPosition.toDto(position);
       positionDTOs.add(currentPosition);
-    }
-
-    for (PositionDTO dto : positionDTOs) {
-      System.out.println("current dto : " + dto.getTicker());
     }
     return positionDTOs;
   }
@@ -66,9 +58,10 @@ public class WalletService {
   public List<PositionDTO> addPosition(String username, List<PositionDTO> positionDTOs){
     if (positionDTOs == null || positionDTOs.isEmpty())
       return null;
+
     List<PositionDTO> positionList = new ArrayList<>();
     for (PositionDTO dto : positionDTOs) {
-      Position position = repository.getUserPosition(username, dto.getTicker());
+      Position position = repository.getPositionsByUsernameAndTicker(username, dto.getTicker());
       if(position == null){
         position = new Position();
         position.setUsername(username);
@@ -77,6 +70,7 @@ public class WalletService {
         position.setUnitValue(dto.getUnitValue());
       } else {
         position.setQuantity(position.getQuantity() + dto.getQuantity());
+        position.setUnitValue(dto.getUnitValue());
       }
       repository.save(position);
       PositionDTO currentPosition = new PositionDTO();

@@ -3,3 +3,44 @@ GET http://localhost:9007/wallet/Jacques/net-worth
 
 ### get Jacques oppened positions
 GET http://localhost:9007/wallet/Jacques
+
+### add a new position to Jacques
+POST http://localhost:9007/wallet/Jacques
+Content-Type: application/json
+
+[
+  {
+    "ticker": "PYPL",
+    "quantity": -60,
+    "unitValue": 5.0
+  },
+  {
+    "ticker": "CASH",
+    "quantity": -150.0,
+    "unitValue": 1.0
+  }
+]
+
+### BAD REQUESTS
+### get a non-existent user net worth
+GET http://localhost:9007/wallet/John/net-worth
+
+### get positions from non-existent user
+GET http://localhost:9007/wallet/John
+
+### add a new position to non-existent user
+POST http://localhost:9007/wallet/John
+Content-Type: application/json
+
+[
+  {
+    "ticker": "PYPL",
+    "quantity": 10,
+    "unitValue": 10.0
+  },
+  {
+    "ticker": "CASH",
+    "quantity": -150.0,
+    "unitValue": 1.0
+  }
+]
