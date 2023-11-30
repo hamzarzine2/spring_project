@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(name = "price", url = "http://localhost:9008")
 public interface PriceProxy {
     @PatchMapping("/price/{ticker}")
-    ResponseEntity<Void> updatePrice(@PathVariable String ticker, @RequestBody long price);
+    ResponseEntity<Void> updatePrice(@PathVariable String ticker, @RequestBody int price);
 }

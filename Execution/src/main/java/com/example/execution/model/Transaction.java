@@ -14,5 +14,5 @@ public class Transaction {
     private String buy_order_guid;
     private String sell_order_guid;
     private int quantity;
-    private long price;
+    private int price;
 }

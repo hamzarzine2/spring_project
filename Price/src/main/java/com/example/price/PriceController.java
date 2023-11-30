@@ -2,10 +2,7 @@ package com.example.price;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class PriceController {
@@ -21,7 +18,8 @@ public class PriceController {
   }
 
   @PatchMapping("/price/{ticker}")
-  public ResponseEntity<Integer> updatePrice(@PathVariable String ticker, int newPrice){
+  public ResponseEntity<Integer> updatePrice(@PathVariable String ticker, @RequestBody int newPrice){
+    System.out.println(newPrice);
     if (!repository.findById(ticker).isPresent())
       return new ResponseEntity<>(1, HttpStatus.OK);//TODO
     if (service.updatePrice(newPrice, ticker) == -1)
