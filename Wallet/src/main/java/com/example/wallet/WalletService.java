@@ -76,7 +76,6 @@ public class WalletService {
       currentPosition.toDto(position);
       positionList.add(currentPosition);
     }
-    System.out.println("exit addPosition");
     return positionList;
   }
 }
