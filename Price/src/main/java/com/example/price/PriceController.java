@@ -19,6 +19,7 @@ public class PriceController {
   @GetMapping("/price/{ticker}")
   public ResponseEntity<Double> getLastPrice(@PathVariable String ticker){
     double lastPrice = service.getLastPrice(ticker);
+    System.out.println("Last price: " + lastPrice);
     if (lastPrice == -1)
       return new ResponseEntity<>(1.0, HttpStatus.OK);
     return new ResponseEntity<>(lastPrice, HttpStatus.OK);
@@ -28,7 +29,7 @@ public class PriceController {
   public ResponseEntity<Double> updatePrice(@PathVariable String ticker, @RequestBody double newPrice) {
     if (newPrice < 0)
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    service.updatePrice(newPrice, ticker);
-    return new ResponseEntity<>(newPrice, HttpStatus.OK);
+    double returnPrice = service.updatePrice(newPrice, ticker);
+    return new ResponseEntity<>(returnPrice, HttpStatus.OK);
   }
 }

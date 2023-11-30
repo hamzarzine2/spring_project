@@ -1,14 +1,12 @@
 package com.example.price;
 
 import com.example.price.models.Price;
-import com.example.price.models.PriceDTO;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PriceService {
 
   private final PriceRepository repository;
-  private PriceDTO priceDTO = new PriceDTO();
 
   public PriceService(PriceRepository priceRepository) {
     this.repository = priceRepository;

@@ -8,6 +8,4 @@ GET http://localhost:9008/price/DFET
 PATCH http://localhost:9008/price/NFLX
 Content-Type: application/json
 
-{
-    "newPrice": 100
-}
+100
