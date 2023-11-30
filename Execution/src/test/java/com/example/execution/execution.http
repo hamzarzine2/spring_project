@@ -6,8 +6,8 @@ Content-Type: application/json
   "ticker": "AAPL",
   "seller": "Jacques",
   "buyer": "Jean",
-  "buy_order_guid": "8f9c9dfe-f8f3-41e7-9a51-4995823a8544",
-  "sell_order_guid": "8f9c9dfe-f8f3-41e7-0000-1145823a850e",
+  "buy_order_guid": "8f9c9dfe-f8f3-41e7-9a51-4995823a854e",
+  "sell_order_guid":"8f9c9dfe-f8f3-41e7-0a0e-1145823a850e",
   "quantity": 10,
   "price": 100
 }

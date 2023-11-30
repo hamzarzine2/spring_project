@@ -21,6 +21,7 @@ public class ExecutionController {
     @PostMapping("/execute/{ticker}/{seller}/{buyer}")
     public ResponseEntity<Void> Execute(@PathVariable String ticker, @PathVariable String seller, @PathVariable String buyer, @RequestBody Transaction transaction) {
         System.out.println("testestest");
+
         boolean result = executionService.executeOrder(ticker, seller, buyer, transaction);
         return result? new  ResponseEntity<>(HttpStatus.OK):new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }

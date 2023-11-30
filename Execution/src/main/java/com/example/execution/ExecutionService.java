@@ -26,6 +26,8 @@ public class ExecutionService {
 
     public boolean executeOrder(String ticker, String seller, String buyer, Transaction transaction) {
         System.out.println("testestest");
+        orderProxy.updateOrder(transaction.getBuy_order_guid(), 12);
+
         return executeupdateBuyer(transaction,buyer) && executeupdateSeller(transaction,seller) &&
                 handleResponse(priceProxy.updatePrice(ticker, transaction.getPrice())) &&
                 updateOrder(transaction.getBuy_order_guid(), transaction.getQuantity()) &&
