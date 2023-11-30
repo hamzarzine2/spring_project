@@ -58,6 +58,10 @@
         <version>2.4.4</version>
         <scope>compile</scope>
       </dependency>
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
