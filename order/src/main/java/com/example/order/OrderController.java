@@ -35,14 +35,10 @@ public class OrderController {
     }
 
     @PatchMapping("/order/{guid}")
-    public ResponseEntity<Order> updateOne(@PathVariable("guid") String guid, @RequestBody int order) {
-        System.out.println("test");
-        System.out.println(order);
-        /*if(order.getFilled()<0) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        order.setId(guid);
-        boolean updated = orderService.updateOne(order);
-        if(!updated) return new ResponseEntity<>(HttpStatus.NOT_FOUND);*/
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Order> updateOne(@PathVariable("guid") String guid, @RequestBody Order orderValue) {
+        int filledValue = orderValue.getFilled();
+        if(filledValue<0) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return orderService.updateOne(guid,filledValue) ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/order/by-user/{username}")

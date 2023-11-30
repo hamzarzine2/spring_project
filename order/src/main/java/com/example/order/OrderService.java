@@ -23,11 +23,11 @@ public class OrderService {
         return orderRepository.findById(guid).orElse(null);
     }
 
-    public boolean updateOne(Order order) {
-        Order orderToChange = orderRepository.findById(order.getId()).orElse(null);
-        if (orderToChange==null) return false;
-        orderToChange.setFilled(order.getFilled());
-        orderRepository.save(orderToChange);
+    public boolean updateOne(String guid, int filled) {
+        Order order = readOne(guid);
+        if (order == null) return false;
+        order.setFilled(order.getFilled()+ filled);
+        orderRepository.save(order);
         return true;
     }
 
