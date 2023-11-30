@@ -14,6 +14,8 @@
         <option value="$PROJECT_DIR$/Execution/pom.xml" />
         <option value="$PROJECT_DIR$/matching/pom.xml" />
         <option value="$PROJECT_DIR$/Price/pom.xml" />
+        <option value="$PROJECT_DIR$/gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/Gateway/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
