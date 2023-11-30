@@ -22,6 +22,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Execution" target="17" />
       <module name="matching" target="1.8" />
       <module name="product" target="17" />
       <module name="wrong_matching" target="17" />
@@ -32,8 +33,8 @@
       <module name="Eureka" options="-parameters" />
       <module name="Price" options="-parameters" />
       <module name="Wallet" options="-parameters" />
-      <module name="auth" options="-parameters" />
-      <module name="order" options="-parameters" />
+      <module name="auth" options="" />
+      <module name="order" options="" />
       <module name="product" options="-parameters" />
     </option>
   </component>
