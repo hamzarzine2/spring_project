@@ -16,11 +16,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="investor" />
         <module name="Execution" />
-        <module name="auth" />
         <module name="Price" />
+        <module name="auth" />
         <module name="Wallet" />
         <module name="Eureka" />
         <module name="gateway" />
+        <module name="matching" />
         <module name="order" />
       </profile>
     </annotationProcessing>
