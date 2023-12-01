@@ -1,5 +1,5 @@
 
-INSERT INTO investors(user_name,email,birth_date,first_name,last_name) VALUES ('souli','souli@gmail.com','1/1/2023','Soulaïmane','Choujaâ');
+INSERT INTO investors(user_name,email,birth_date,first_name,last_name) VALUES ('souli','souli@gmail.com','2023-01-01','Soulaïmane','Choujaâ');
 INSERT INTO investors (user_name, email, birth_date, first_name, last_name) VALUES ('user1', 'user1@gmail.com', '1990-05-15', 'John', 'Doe');
 INSERT INTO investors (user_name, email, birth_date, first_name, last_name) VALUES ('user2', 'user2@gmail.com', '1985-08-22', 'Jane', 'Smith');
 INSERT INTO investors (user_name, email, birth_date, first_name, last_name) VALUES ('user3', 'user3@gmail.com', '1992-03-10', 'Bob', 'Johnson');
