@@ -1,0 +1,96 @@
+### Récupère les informations relatives à un investisseur donné
+GET http://localhost:9003/investor/User1
+
+### Crée un nouvel investisseur dans le système
+POST http://localhost:9003/investor/User1
+Content-Type: application/json
+
+{
+  "username": "User1",
+  "email": "user1@gmail.com",
+  "firstname": "user",
+  "lastname": "resu",
+  "birthdate":"2023/11/11",
+  "password": "1234"
+}
+
+### Modifie les données signalétiques d'un investisseur existant
+PUT http://localhost:9003/investor/User1
+Content-Type: application/json
+
+{
+  "username": "User1",
+  "email": "user1@gmail.com",
+  "firstname": "super",
+  "lastname": "user",
+  "birthdate":"2023/11/11",
+  "password": "1234"
+}
+
+### Supprime l'utilisateur du système.
+DELETE http://localhost:9003/investor/User1
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+### Initie une session pour un investisseur au sein de la plateforme VSX
+POST http://localhost:9003/authentication/connect
+Content-Type: application/json
+
+{
+  "pseudo": "User1",
+  "email": "user1@gmail.com"
+}
+
+### Mets à jour les credentials d'un investisseur existant
+PUT http://localhost:9003/authentication/User1
+Content-Type: application/json
+
+{
+  "pseudo": "User1",
+  "email": "user1@gmail.com"
+}
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+### Passe un ordre sur la plateforme d'échange.
+POST http://localhost:9003/order
+Content-Type: application/json
+
+{
+  "owner": "body",
+  "timestamp": 457696995,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "SELL",
+  "type": "LIMIT",
+  "limit": 100,
+  "filled":9
+}
+
+### liste tous les ordres (ouverts et complétés) qui ont été passés par un investisseur donné
+GET http://localhost:9003/order/by-user/User1
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+### Renvoie la liste des positions ouvertes (quantité possédée > 0)
+GET http://localhost:9003/wallet/User1
+
+### Permet à l'investisseur de verser ou retirer du cash de son portefeuille
+POST http://localhost:9003/wallet/User1/cash
+Content-Type: application/json
+
+{
+  "cash": 3000
+}
+
+###  Renvoie la valeur totale du portefeuille d'un investisseur
+GET http://localhost:9003/wallet/User1/net-worth
+
+### Permet à l'investisseur de verser ou retirer une quantité d'un titre de son portefeuille
+POST http://localhost:9003/wallet/User1/position/AAPL
+Content-Type: application/json
+
+{
+  "quantity": 5000
+}

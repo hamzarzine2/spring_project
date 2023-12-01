@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bad2f8d5-04fd-44ca-a43b-acbf0e4d8621" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/kotlinc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/matching.iml" beforeDir="false" afterPath="$PROJECT_DIR$/matching.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/log4jdbc.log4j2.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/AppConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/MatchingApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/MatchingController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/MatchingService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/Model/Order.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/Model/Side.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/Model/Type.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/hello.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/org/example/HelloControllerTest.class" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="2Yu7HraGZmgNjxe2TjDrKwt0Dpk" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/chouj/Desktop/Bloc2/Q2/PAE",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bad2f8d5-04fd-44ca-a43b-acbf0e4d8621" name="Changes" comment="" />
+      <created>1701363526030</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1701363526030</updated>
+      <workItem from="1701363527379" duration="1000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

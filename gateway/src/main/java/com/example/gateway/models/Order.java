@@ -13,8 +13,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order {
-  @Id
-  private String guid;
   private String owner;
   private int timestamp;
   private String ticker;

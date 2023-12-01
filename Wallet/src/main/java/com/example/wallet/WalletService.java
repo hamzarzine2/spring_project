@@ -70,6 +70,7 @@ public class WalletService {
         position.setUnitValue(dto.getUnitValue());
       } else {
         position.setQuantity(position.getQuantity() + dto.getQuantity());
+        position.setUnitValue(dto.getUnitValue());
       }
       repository.save(position);
       PositionDTO currentPosition = new PositionDTO();

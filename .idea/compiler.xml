@@ -3,10 +3,18 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.30/f195ee86e6c896ea47a1d39defbe20eb59cd149d/lombok-1.18.30.jar" />
+        </processorPath>
+        <module name="gateway.main" />
+      </profile>
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="investor" />
         <module name="Execution" />
         <module name="Price" />
         <module name="auth" />
@@ -17,10 +25,19 @@
         <module name="order" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="matching" target="11" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="matching" options="-parameters" />
+      <module name="Eureka" options="-parameters" />
+      <module name="Execution" options="-parameters" />
+      <module name="Price" options="-parameters" />
+      <module name="Wallet" options="-parameters" />
+      <module name="auth" options="-parameters" />
+      <module name="gateway" options="-parameters" />
+      <module name="investor" options="-parameters" />
       <module name="order" options="-parameters" />
     </option>
   </component>
