@@ -1,4 +1,4 @@
-### good request
+### create one
 POST http://localhost:9001/investor/Jacques
 Content-Type: application/json
 
@@ -14,7 +14,7 @@ Content-Type: application/json
 }
 
 
-### bas request
+### edit one
 PUT http://localhost:9001/investor/Jacques
 Content-Type: application/json
 
@@ -26,13 +26,13 @@ Content-Type: application/json
   "email": "oussama@gmail.com"
 }
 
-### good request get
+### get one
 GET http://localhost:9001/investor/Jacques
 
-### good request get
+### get all
 GET http://localhost:9001/investor/all
 
 
-###good request
+### delete one
 DELETE http://localhost:9001/investor/Jacques
 
