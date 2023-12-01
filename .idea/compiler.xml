@@ -24,9 +24,6 @@
         <module name="order" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="matching" target="11" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
