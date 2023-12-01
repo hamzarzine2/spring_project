@@ -17,5 +17,5 @@ public class Investor {
     private String email;
     private String firstname;
     private String lastname;
-    private LocalDate birthdate;
+    private String birthdate;
 }

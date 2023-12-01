@@ -46,6 +46,7 @@ public class AuthenticationController {
         if (!Objects.equals(credentials.getPseudo(), pseudo)) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         if (credentials.invalid()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         boolean created = service.createOne(credentials);
+        System.out.println("ici");
         if (!created) return new ResponseEntity<>(HttpStatus.CONFLICT);
         else return new ResponseEntity<>(HttpStatus.CREATED);
     }

@@ -15,11 +15,11 @@ Content-Type: application/json
 
 
 ### bas request
-PUT http://localhost:9001/investor/ouf
+PUT http://localhost:9001/investor/Jacques
 Content-Type: application/json
 
 {
-  "username": "ouf",
+  "username": "Jacques",
   "firstname": "oussama",
   "lastname": "elBoubou",
   "birthdate": "01/02/2012",
@@ -27,12 +27,12 @@ Content-Type: application/json
 }
 
 ### good request get
-GET http://localhost:9001/investor/ouf
+GET http://localhost:9001/investor/Jacques
 
 ### good request get
 GET http://localhost:9001/investor/all
 
 
 ###good request
-DELETE http://localhost:9001/investor/ouf
+DELETE http://localhost:9001/investor/Jacques
 

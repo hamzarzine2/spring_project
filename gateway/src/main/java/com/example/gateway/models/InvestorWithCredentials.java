@@ -11,18 +11,15 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class InvestorWithCredentials {
-  private String username;
-  private String email;
-  private String firstname;
-  private String lastname;
-  private LocalDate birthdate;
+
+  private Investor investor_data;
   private String password;
 
   public Investor toUser() {
-    return new Investor(username, firstname, lastname, email, birthdate);
+    return investor_data;
   }
   public Credentials toCredentials() {
-    return new Credentials(username, password);
+    return new Credentials(investor_data.getUsername(), password);
   }
 
 }

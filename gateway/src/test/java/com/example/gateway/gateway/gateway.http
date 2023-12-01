@@ -6,40 +6,51 @@ POST http://localhost:9003/investor/User1
 Content-Type: application/json
 
 {
-  "username": "User1",
-  "email": "user1@gmail.com",
-  "firstname": "user",
-  "lastname": "resu",
-  "birthdate":"2023/11/11",
-  "password": "1234"
+  "password": "123",
+  "investor_data": {
+    "username": "User1",
+    "firstname": "oussama",
+    "lastname": "elBoubou",
+    "birthdate": "01/02/2012",
+    "email": "oussama@dde"
+  }
 }
 
-### Modifie les données signalétiques d'un investisseur existant
-PUT http://localhost:9003/investor/User1
-Content-Type: application/json
 
-{
-  "username": "User1",
-  "email": "user1@gmail.com",
-  "firstname": "super",
-  "lastname": "user",
-  "birthdate":"2023/11/11",
-  "password": "1234"
-}
-
-### Supprime l'utilisateur du système.
-DELETE http://localhost:9003/investor/User1
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
-### Initie une session pour un investisseur au sein de la plateforme VSX
+### Crée un nouvel investisseur dans le système
 POST http://localhost:9003/authentication/connect
 Content-Type: application/json
 
 {
-  "pseudo": "User1",
-  "email": "user1@gmail.com"
+  "pseudo" : "User1",
+  "password" : "111"
 }
+
+> {% client.global.set("token", response.body) %}
+
+
+
+### Modifie les données signalétiques d'un investisseur existant
+PUT http://localhost:9003/investor/User1
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "username": "User1",
+    "firstname": "oussama",
+    "lastname": "elBoubou",
+    "birthdate": "01/02/2012",
+    "email": "oussama@dde"
+ }
+
+
+### Supprime l'utilisateur du système.
+DELETE http://localhost:9003/investor/User1
+Authorization: {{token}}
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
 
 ### Mets à jour les credentials d'un investisseur existant
 PUT http://localhost:9003/authentication/User1
@@ -47,10 +58,9 @@ Content-Type: application/json
 
 {
   "pseudo": "User1",
-  "email": "user1@gmail.com"
+  "password": "111"
 }
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 
 ### Passe un ordre sur la plateforme d'échange.
@@ -70,6 +80,8 @@ Content-Type: application/json
 
 ### liste tous les ordres (ouverts et complétés) qui ont été passés par un investisseur donné
 GET http://localhost:9003/order/by-user/User1
+Authorization: {{token}}
+
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 

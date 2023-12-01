@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Repository
-@FeignClient(name = "authentication")
+@FeignClient(name = "auth")
 public interface AuthenticationProxy {
 
   @PostMapping("/authentication/connect")

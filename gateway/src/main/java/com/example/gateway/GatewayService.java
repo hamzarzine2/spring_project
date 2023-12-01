@@ -10,6 +10,7 @@ import com.example.gateway.exceptions.NotFoundException;
 import com.example.gateway.exceptions.UnauthorizedException;
 import com.example.gateway.models.*;
 import feign.FeignException;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -130,24 +131,9 @@ public class GatewayService {
   public void createInvestor(InvestorWithCredentials investor)
           throws BadRequestException, ConflictException {
     try {
-      investorProxy.createInvestor(investor.getUsername(), investor.toUser());
+      System.out.println(investor);
+      investorProxy.createInvestor(investor.getInvestor_data().getUsername(), investor);
     } catch (FeignException e) {
-      if (e.status() == 400)
-        throw new BadRequestException();
-      else if (e.status() == 409)
-        throw new ConflictException();
-      else
-        throw e;
-    }
-
-    try {
-      authenticationProxy.createCredentials(investor.getUsername(), investor.toCredentials());
-    } catch (FeignException e) {
-      try {
-        investorProxy.deleteInvestor(investor.getUsername());
-      } catch (FeignException ignored) {
-      }
-
       if (e.status() == 400)
         throw new BadRequestException();
       else if (e.status() == 409)
@@ -164,20 +150,10 @@ public class GatewayService {
    * @throws BadRequestException if the request is malformed or invalid
    * @throws NotFoundException   if the investor to update is not found
    */
-  public void updateInvestor(InvestorWithCredentials investor)
+  public void updateInvestor(Investor investor)
           throws BadRequestException, NotFoundException {
-    Investor previousInvestor;
     try {
-      previousInvestor = investorProxy.readInvestor(investor.getUsername());
-    } catch (FeignException e) {
-      if (e.status() == 404)
-        throw new NotFoundException();
-      else
-        throw e;
-    }
-
-    try {
-      investorProxy.updateInvestor(investor.getUsername(), investor.toUser());
+      investorProxy.updateInvestor(investor.getUsername(), investor);
     } catch (FeignException e) {
       if (e.status() == 400)
         throw new BadRequestException();
@@ -187,21 +163,6 @@ public class GatewayService {
         throw e;
     }
 
-    try {
-      authenticationProxy.updateCredentials(investor.getUsername(), investor.toCredentials());
-    } catch (FeignException e) {
-      try {
-        investorProxy.updateInvestor(investor.getUsername(), previousInvestor);
-      } catch (FeignException ignored) {
-      }
-
-      if (e.status() == 400)
-        throw new BadRequestException();
-      else if (e.status() == 404)
-        throw new NotFoundException();
-      else
-        throw e;
-    }
   }
 
   /**
@@ -211,17 +172,7 @@ public class GatewayService {
    * @return True if the investor was found and deleted successfully, false otherwise
    */
   public boolean deleteInvestor(String username) {
-    orderProxy.deleteOrdersFromInvestor(username);
-
     boolean found = true;
-    try {
-      authenticationProxy.deleteCredentials(username);
-    } catch (FeignException e) {
-      if (e.status() == 404)
-        found = false;
-      else
-        throw e;
-    }
     try {
       investorProxy.deleteInvestor(username);
     } catch (FeignException e) {
@@ -262,19 +213,8 @@ public class GatewayService {
    * @param username username of the investor
    * @return List of all orders from this user, or null if the user could not be found
    */
-  public Iterable<Order> getOrderByUsername(String username)
+  public List<Order> getOrderByUsername(String username)
           throws NotFoundException, UnauthorizedException {
-    Investor investor;
-    try {
-      investor = investorProxy.readInvestor(username);
-      if (!investor.getUsername().equals(username)) {
-        throw new UnauthorizedException();
-      }
-    } catch (FeignException e) {
-      if (e.status() == 404) {
-        throw new NotFoundException();
-      }
-    }
     return orderProxy.getOrdersFromInvestor(username);
   }
 

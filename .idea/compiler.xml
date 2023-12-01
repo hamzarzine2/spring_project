@@ -21,8 +21,8 @@
         <module name="Wallet" />
         <module name="Eureka" />
         <module name="gateway" />
-        <module name="matching" />
         <module name="order" />
+        <module name="matching" />
       </profile>
     </annotationProcessing>
   </component>
@@ -35,6 +35,7 @@
       <module name="auth" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="investor" options="-parameters" />
+      <module name="matching" options="-parameters" />
       <module name="order" options="-parameters" />
     </option>
   </component>

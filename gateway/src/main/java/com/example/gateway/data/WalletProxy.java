@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Repository
-@FeignClient(name = "WalletProxy")
+@FeignClient(name = "wallet")
 public interface WalletProxy {
 
   @GetMapping("/wallet/{username}")

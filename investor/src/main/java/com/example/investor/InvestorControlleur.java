@@ -43,9 +43,11 @@ public class InvestorControlleur {
 
 
   @PostMapping("/investor/{username}")
-  public ResponseEntity<Investor> createOne(@PathVariable String username,@RequestBody InvestorWithPassword investorWithPswrd) {
+  public ResponseEntity<Void> createOne(@PathVariable String username,@RequestBody InvestorWithPassword investorWithPswrd) {
+    System.out.println(investorWithPswrd);
     if(!isValid(investorWithPswrd.getInvestor_data(),investorWithPswrd.getPassword()))
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    System.out.println("dddd");
 
     boolean created = service.createOne(investorWithPswrd);
 
@@ -56,7 +58,7 @@ public class InvestorControlleur {
   }
 
   @PutMapping("/investor/{username}")
-  public ResponseEntity<Investor> updateOne(@PathVariable String username, @RequestBody Investor investor) {
+  public ResponseEntity<Void> updateOne(@PathVariable String username, @RequestBody Investor investor) {
     if(!isValid(investor,"investorwithoutpassword"))
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     boolean updated = service.updateOne(investor);
@@ -66,18 +68,18 @@ public class InvestorControlleur {
   }
 
   @DeleteMapping("/investor/{username}")
-  public ResponseEntity<Investor> deleteOne(@PathVariable String username) {
+  public ResponseEntity<Void> deleteOne(@PathVariable String username) {
     HttpStatus deleted = service.delete(username);
     return new ResponseEntity<>(deleted);
   }
 
   public boolean isValid(Investor investor, String password){
 
-
     String regex = ".{3,}@.{3,}";
     Pattern pattern = Pattern.compile(regex);
     Matcher matcher = pattern.matcher(investor.getEmail());
-
+    System.out.println("dddd");
+    System.out.println(investor.getEmail());
     return !investor.getBirthdate()
         .isBlank() && matcher.matches() &&  !password.isBlank()
         && !investor.getEmail().isBlank() && !investor

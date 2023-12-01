@@ -5,6 +5,7 @@ import com.example.gateway.exceptions.ConflictException;
 import com.example.gateway.exceptions.NotFoundException;
 import com.example.gateway.exceptions.UnauthorizedException;
 import com.example.gateway.models.*;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,8 +36,7 @@ public class GatewayController {
   public ResponseEntity<Void> createInvestor(@PathVariable String username,
                                              @RequestBody InvestorWithCredentials investor) {
 
-    if (!Objects.equals(investor.getUsername(), username)) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
+    if (!Objects.equals(investor.getInvestor_data().getUsername(), username)) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     try {
       service.createInvestor(investor);
       return new ResponseEntity<>(HttpStatus.CREATED);
@@ -49,14 +49,11 @@ public class GatewayController {
 
   @PutMapping("/investor/{username}")
   public ResponseEntity<Void> updateInvestor(@PathVariable String username,
-                                             @RequestBody InvestorWithCredentials investor,
+                                             @RequestBody Investor investor,
                                              @RequestHeader("Authorization") String token) {
-
     if (!Objects.equals(investor.getUsername(), username)) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
     String userPseudo = service.verify(token);
     if (userPseudo == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
     try {
       service.updateInvestor(investor);
       return new ResponseEntity<>(HttpStatus.OK);
@@ -69,7 +66,7 @@ public class GatewayController {
   public ResponseEntity<Void> deleteInvestor(@PathVariable String username,
                                              @RequestHeader("Authorization") String token) {
     String user = service.verify(token);
-    if (user == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    if (user == null) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     else if (!Objects.equals(user, username)) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
     boolean found = service.deleteInvestor(username);
@@ -78,7 +75,7 @@ public class GatewayController {
     else return new ResponseEntity<>(HttpStatus.OK);
   }
 
-  @PostMapping("/authentication/connect:")
+  @PostMapping("/authentication/connect")
   public ResponseEntity<String> connect(@RequestBody Credentials credentials) {
     try {
       String token = service.connect(credentials);
@@ -114,9 +111,10 @@ public class GatewayController {
   }
 
   @GetMapping("/order/by-user/{username}")
-  public ResponseEntity<Iterable<Order>> getOrdersByUser(@PathVariable String username,
+  public ResponseEntity<List<Order>> getOrdersByUser(@PathVariable String username,
                                                          @RequestHeader("Authorization") String token) {
-    Iterable<Order> orders;
+    List<Order> orders;
+
     try {
       String user = service.verify(token);
       if (!user.equals(username)) return new ResponseEntity<>(HttpStatus.FORBIDDEN);
